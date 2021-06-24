@@ -6,6 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": {
+    "name": "Rik Schennink | PQINA",
+    "url": "https://pqina.nl/"
+  },
+  "repository": "pqina/tablissimo",
   "license": "MIT"
 }

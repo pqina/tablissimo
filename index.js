@@ -234,11 +234,6 @@ const getBody = (str, body = [], offset, strToRows) =>
 const renderCell = (str, options = {}) => {
   const { index, context, renderText, renderTableCell } = options;
 
-  // format(date)
-  // colspan(6)
-  // tag(th)
-  // class(foo)
-
   const res = str.match(/[a-z-]+\((.*?)\)/gim) || [];
 
   const props = res.reduce((prev, curr) => {

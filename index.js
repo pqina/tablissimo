@@ -100,6 +100,7 @@ module.exports = (content, options) => {
         // html to render
         html
       ),
+    renderTableContainer = (html, options) => html,
 
     // hooks to alter data
     willRenderTableHeader = (header, props) => header,
@@ -172,8 +173,8 @@ module.exports = (content, options) => {
   const tcaption = caption ? renderTableCaption(caption, renderProps) : "";
 
   // create table wrapper
-  return renderTable(
-    `\n${tcaption}\n${thead}\n${tbody}\n${tfoot}\n`,
+  return renderTableContainer(
+    renderTable(`\n${tcaption}\n${thead}\n${tbody}\n${tfoot}\n`, renderProps),
     renderProps
   );
 };

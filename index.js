@@ -9,6 +9,8 @@ const TABLE_ATTRIBUTES = ['id', 'class'];
 
 module.exports = (content, options = {}) => {
     const {
+        debug = false,
+
         // table name / key
         name = undefined,
 
@@ -115,6 +117,8 @@ module.exports = (content, options = {}) => {
         willRenderTableFooter = (footer, props) => footer,
     } = options;
 
+    debug && console.log('Tablissimo [content]', content);
+
     // remove whitespace around content so we don't create blank lines and can be sure the first line is the header
     content = sanitizeContent(trim(content));
 
@@ -124,11 +128,15 @@ module.exports = (content, options = {}) => {
         strToCellProps,
     });
 
+    debug && console.log('Tablissimo [metadata]', metadata);
+
     // get metadata
     const { caption, head, body, foot } = metadata || {};
 
     // holds rows
     const rows = getBody(content, body, (offset = metadata ? 1 : 0), strToRows);
+
+    debug && console.log('Tablissimo [rows]', rows);
 
     // no rows found, exit
     if (!rows.length) return '';
@@ -136,6 +144,7 @@ module.exports = (content, options = {}) => {
     // props used for rendering the table
     const renderProps = {
         ...metadata,
+        debug,
         name,
         formatters,
         renderText,
@@ -257,6 +266,7 @@ const getBody = (str, body = [], offset, strToRows) =>
 
 const renderCell = (str, options = {}) => {
     const {
+        debug,
         index,
         context,
         isRowHeading,
@@ -264,6 +274,8 @@ const renderCell = (str, options = {}) => {
         renderText,
         renderTableCell,
     } = options;
+
+    debug && console.log('Tablissimo [cell] content', str);
 
     // extract attributes from string, first value should always be text
     let [text = '', attrList = ''] = str
@@ -275,11 +287,15 @@ const renderCell = (str, options = {}) => {
         .map(trim)
         .filter(isEmpty);
 
+    debug && console.log('Tablissimo [cell] parsed', { text, attrList });
+
     // separate attributes in list
     const attrs = attrList
         .split(/([a-z-]+=".*?")/)
         .map(trim)
         .filter(isEmpty);
+
+    debug && console.log('Tablissimo [cell] attrs', attrs);
 
     // get props object from attributes
     const props = attrs.reduce((prev, curr) => {
@@ -298,6 +314,8 @@ const renderCell = (str, options = {}) => {
         prev[key] = value;
         return prev;
     }, {});
+
+    debug && console.log('Tablissimo [cell] props', props);
 
     // format tag / scope
     let { tag, scope } = props;
@@ -318,6 +336,8 @@ const renderCell = (str, options = {}) => {
     // get inner HTML
     const html = renderText(trim(text), { ...options, ...props });
 
+    debug && console.log('');
+
     // render the cell
     return renderTableCell(html, {
         ...props,
@@ -329,7 +349,9 @@ const renderCell = (str, options = {}) => {
 };
 
 const renderRow = (cells, options = {}, index = -1) => {
-    const { context, renderTableRow } = options;
+    const { context, renderTableRow, debug } = options;
+
+    debug && console.log('Tablissimo [row]', index);
 
     const html =
         '\n' +

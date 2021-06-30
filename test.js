@@ -1,6 +1,7 @@
 const tablissimo = require('./index.js');
 
 const options = {
+    debug: true,
     format: {
         // format as date
         date: (str) =>

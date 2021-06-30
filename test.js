@@ -1,17 +1,4 @@
-# Tablissimo
-
-Easy tables with text syntax, mostly a dependency for `@pqina/11ty-tablissimo`
-
-## Install
-
-```
-npm i @pqina/tablissimo --save-dev
-```
-
-## Usage
-
-```js
-const tablissimo = require('@pqina/tablissimo');
+const tablissimo = require('./index.js');
 
 const options = {
     format: {
@@ -29,7 +16,7 @@ const options = {
     },
 };
 
-const html = tablissimo(
+const table = tablissimo(
     `
 caption: TVA Timeline Disruptions
 head: Event | Date | Time | Location
@@ -62,6 +49,5 @@ Rome, Italy
 `,
     options
 );
-```
 
-## Options
+console.log(table);

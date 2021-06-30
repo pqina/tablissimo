@@ -1,15 +1,15 @@
 {
-  "name": "@pqina/tablissimo",
-  "version": "0.0.2",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": {
-    "name": "Rik Schennink | PQINA",
-    "url": "https://pqina.nl/"
-  },
-  "repository": "pqina/tablissimo",
-  "license": "MIT"
+    "name": "@pqina/tablissimo",
+    "version": "0.0.4",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": {
+        "name": "Rik Schennink | PQINA",
+        "url": "https://pqina.nl/"
+    },
+    "repository": "pqina/tablissimo",
+    "license": "MIT"
 }

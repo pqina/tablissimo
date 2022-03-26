@@ -31,7 +31,7 @@ module.exports = (content, options = {}) => {
 
         // tests
         isRowHeading = (str) => /^_.+_$/.test(str),
-        strToRowHeading = (str) => trim(str.substr(1, str.length - 2)),
+        strToRowHeading = (str) => trim(str.slice(1, -1)),
 
         // filter table cell
         filterTableCellAttributes = ({
